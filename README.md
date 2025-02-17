@@ -4,7 +4,7 @@ A Python-based research assistant that uses Claude 3.5 Sonnet to automatically g
 
 ## Features
 
-- Automatic field inference from task descriptions
+- **Dynamic Field Inference**: Automatically determines relevant data fields based on your task description
 - Web search capabilities using Google
 - Webpage content extraction and parsing
 - Iterative information gathering with configurable limits
@@ -42,45 +42,57 @@ You can use the agent either by importing it into your Python code or running it
 
 ### Command Line Usage
 
-
 ```bash
 python agent.py
 ```
 
-When prompted, enter your research task. The agent will:
-1. Infer relevant fields from your task
+When prompted, enter your research task. For example:
+```
+Enter the task instructions:
+Find the top 3 biotech companies developing treatments for schizophrenia
+```
+
+The agent will:
+1. Analyze your task to determine relevant fields (e.g., company_name, focus_area, development_stage)
 2. Search the web for information
-3. Extract and process the content
-4. Return structured results
+3. Extract and structure the content
+4. Return comprehensive results
 
 ### Python Usage
 
 ```python
 from agent import process_task
 
-task = "Find information about the top 3 AI companies in 2024"
+task = "Find the top 3 biotech companies developing treatments for schizophrenia"
 result = process_task(task, max_searches=2, max_results=3)
 print(result)
+```
+
+Example output:
+```json
+{
+    "results": [
+        {
+            "company_name": "Karuna Therapeutics",
+            "focus_area": "CNS disorders, primarily schizophrenia",
+            "development_stage": "Late-stage clinical",
+            "key_products": "KarXT (xanomeline-trospium) for schizophrenia",
+            "market_cap": "6.5B USD",
+            "headquarters": "Boston, Massachusetts"
+        },
+        // ... additional results
+    ],
+    "comments": "Analysis of current market leaders...",
+    "process": "Conducted multiple searches focusing on...",
+    "preface": "Overview of leading companies in schizophrenia treatment...",
+    "next_action": ""
+}
 ```
 
 ### Configuration Parameters
 
 - `max_searches`: Maximum number of search iterations (default: 5)
 - `max_results`: Maximum number of results to collect (default: 10)
-
-## Output Format
-
-The agent returns a JSON object containing:
-
-```json
-{
-    "results": [],        // List of items matching the required fields
-    "comments": "",       // Additional information about the results
-    "process": "",        // Description of the approach taken
-    "preface": "",        // Any additional context
-    "next_action": ""     // Next action to take (empty if complete)
-}
-```
 
 ## Available Tools
 
