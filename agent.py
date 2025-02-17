@@ -1,13 +1,8 @@
 from typing import List, Dict
-import requests
-from bs4 import BeautifulSoup
 import json
-from urllib.parse import quote_plus
 from utils import (
     ask_claude, 
-    process_anthropic_response,
-    google_search,
-    get_url_content
+    process_anthropic_response
 )
 
 def infer_fields_from_task(task: str) -> List[str]:
