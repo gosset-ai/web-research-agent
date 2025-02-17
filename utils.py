@@ -3,9 +3,6 @@ from typing import List, Dict
 from dotenv import load_dotenv
 import os
 import json
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import quote_plus
 from tools import google_search, get_url_content
 
 load_dotenv()
@@ -40,7 +37,7 @@ def ask_claude(prompt: str, max_tokens: int = 4096*2, temperature: float = 0) ->
         print(f"Error calling Claude: {e}")
         return None
 
-def process_anthropic_response(messages: List[Dict], tools: List[Dict], max_calls: int = 10, max_tokens: int = 4096*2, temperature: float = 0) -> Dict:
+def process_anthropic_response(messages: List[Dict], tools: List[Dict], max_calls: int = 5, max_tokens: int = 4096*2, temperature: float = 0) -> Dict:
     """Recursively process Anthropic responses, handling tool use requests"""
     if max_calls <= 0:
         print("\n⚠️ Max API calls reached. Stopping recursion.")
