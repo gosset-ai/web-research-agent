@@ -83,9 +83,6 @@ Example output:
         // ... additional results
     ],
     "comments": "Analysis of current market leaders...",
-    "process": "Conducted multiple searches focusing on...",
-    "preface": "Overview of leading companies in schizophrenia treatment...",
-    "next_action": ""
 }
 ```
 

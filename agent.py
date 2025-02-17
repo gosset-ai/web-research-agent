@@ -121,8 +121,6 @@ If your task is to find information online, you can use search_web to search Goo
 Return a JSON with:
 - results: list of items matching the required fields (limit to {max_results} total results)
 - comments: any additional information about the results
-- process: description of your approach
-- preface: any additional text that you would have added before the json. Include it here, don't include it anywhere else. Output json must be valid.
 - next_action: what should be searched or analyzed next (empty string if done)
 
 MAKE SURE THAT YOU OUTPUT A VALID JSON OBJECT. DO NOT INCLUDE ANY OTHER TEXT.
@@ -177,9 +175,6 @@ If you cannot find information, return empty lists/strings as appropriate."""
         "comments": result.get("comments", "") + (
             f"\nSearch limit reached: {search_count >= max_searches}" if search_count >= max_searches else ""
         ),
-        "process": result.get("process", ""),
-        "preface": result.get("preface", ""),
-        "next_action": ""
     }
 
 if __name__ == "__main__":
