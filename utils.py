@@ -3,7 +3,7 @@ from typing import List, Dict
 from dotenv import load_dotenv
 import os
 import json
-from tools import google_search, get_url_content
+from tools_selenium import google_search, get_url_content
 
 load_dotenv()
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
@@ -41,7 +41,16 @@ def process_anthropic_response(messages: List[Dict], tools: List[Dict], max_call
     """Recursively process Anthropic responses, handling tool use requests"""
     if max_calls <= 0:
         print("\n⚠️ Max API calls reached. Stopping recursion.")
-        return {"content": [{"type": "text", "text": "Max API calls reached. Stopping recursion."}]}
+        return {
+            "content": [{
+                "type": "text",
+                "text": json.dumps({
+                    "results": [],
+                    "comments": "Max API calls reached. Some results may be incomplete.",
+                    "next_action": ""
+                })
+            }]
+        }
     
     print(f"\n=== Sending request to Claude (calls remaining: {max_calls}) ===")
     print("Last message:", messages[-1]['content'][:200], "..." if len(str(messages[-1]['content'])) > 200 else "")
@@ -104,4 +113,4 @@ def process_anthropic_response(messages: List[Dict], tools: List[Dict], max_call
 
     except Exception as e:
         print(f"\n❌ Error calling Claude: {e}")
-        return {"content": [{"type": "text", "text": f"Error: {str(e)}"}]} 
+        return {"content": [{"type": "text", "text": f"Error: {str(e)}"}]}

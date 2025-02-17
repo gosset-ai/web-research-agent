@@ -44,17 +44,34 @@ def process_single_action(message: str, tools: List[Dict]) -> Dict:
     
     # Handle different response types
     try:
-        if isinstance(response.content, list):
+        if hasattr(response, 'content'):
+            # Handle normal Anthropic response
             for content in response.content:
                 if content.type == "text":
                     result = json.loads(content.text)
                     print("\n✅ Action processed successfully")
                     return result
+        elif isinstance(response, dict) and 'content' in response:
+            # Handle max calls reached case
+            for content in response['content']:
+                if content['type'] == "text":
+                    result = json.loads(content['text'])
+                    print("\n⚠️ Action processed with limitations")
+                    return result
+        
         print("\n⚠️ No valid response content found")
-        return {}
+        return {
+            "results": [],
+            "comments": "Failed to process response",
+            "next_action": ""
+        }
     except Exception as e:
         print(f"\n❌ Error processing response: {e}")
-        return {}
+        return {
+            "results": [],
+            "comments": f"Error processing response: {str(e)}",
+            "next_action": ""
+        }
 
 def process_task(task: str, max_searches: int = 5, max_results: int = 10) -> Dict:
     """Process a task and return results in specified format
