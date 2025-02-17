@@ -111,4 +111,21 @@ The agent includes two main tools:
 
 Apache 2.0
 
+## About Gosset
+
+[Gosset](https://www.gosset.ai/) provides comprehensive biotech intelligence data powered by AI agents. Key features include:
+
+- **Comprehensive Trial Data**: Access safety and efficacy data from every time point of every trial for every drug
+- **Structured Information**: Trial design and eligibility criteria organized for easy filtering
+- **Multiple Data Sources**: Results aggregated from research papers, conference posters, investor decks, and press releases
+- **Flexible Access**: Data available via dashboard, spreadsheet, or API
+
+### Use Cases
+
+- **Investors**: Comprehensive head-to-head drug comparison data and competitive landscape analyses
+- **Corporate Development**: Rich scientific portfolio information and competitive intelligence
+- **Biotech Consultants**: Quick analysis of trial design parameters and drug efficacy results
+
+Learn more at [https://www.gosset.ai/](https://www.gosset.ai/)
+
 
